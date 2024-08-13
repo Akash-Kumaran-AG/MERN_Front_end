@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Pets.css';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 function Pets() {
     const [pets, setPets] = useState([]);
     const [filter, setFilter] = useState('all'); // State to track the current filter
@@ -27,7 +27,7 @@ function Pets() {
                 </div>
                 {isNavVisible && (
                     <ul>
-                        <li><a href="/Pets" onClick={() => setFilter('all')}>Home</a></li>
+                        <li><Link href="/" onClick={() => setFilter('all')}>Home</Link></li>
                         <li><a href="#" onClick={() => setFilter('dogs')}>Dogs</a></li>
                         <li><a href="#" onClick={() => setFilter('cats')}>Cats</a></li>
                        
