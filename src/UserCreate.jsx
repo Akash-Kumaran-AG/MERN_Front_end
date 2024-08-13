@@ -16,7 +16,7 @@ function Register() {
             console.log(result);
             if(result.status === 200)
             {
-              navigate("/Pets");https://github.com/Akash-Kumaran-AG/Mern_frontend.git
+              navigate("/Pets");
             }
           })
           
