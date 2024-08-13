@@ -7,7 +7,7 @@ const Users = () => {
     const[users,setUsers]=useState([{
     }])
     useEffect(()=>{
-        axios.get('https://mern-backend-debm.onrender.com')
+        axios.get('https://mern-back-end-aocr.onrender.com')
         .then(result => setUsers(result.data))
         .catch(err => console.log(err));
 

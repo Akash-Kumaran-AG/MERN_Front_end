@@ -10,7 +10,7 @@ function Pets() {
     const [isNavVisible, setNavVisible] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/fetchPet')
+        axios.get('https://mern-back-end-aocr.onrender.com/fetchPet')
             .then(response => {
                 setPets(response.data);
             })
