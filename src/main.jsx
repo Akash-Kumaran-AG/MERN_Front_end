@@ -9,6 +9,7 @@ import Pets from "./Pets";
 import UserLogin from "./UserLogin";
 import UserCreate from "./UserCreate";
 import Form from "./Form";
+import Addpet from "./Addpet";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path:"/Form",
     element:<Form/>
+},
+{
+  path:"/Addpet",
+  element:<Addpet/>
 }
 ]);
 

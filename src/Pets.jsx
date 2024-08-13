@@ -10,7 +10,7 @@ function Pets() {
     const [isNavVisible, setNavVisible] = useState(true);
 
     useEffect(() => {
-        axios.get('https://mern-backend-debm.onrender.com/fetchPet')
+        axios.get('http://localhost:3001/fetchPet')
             .then(response => {
                 setPets(response.data);
             })
@@ -59,9 +59,15 @@ function Pets() {
         navigate(`/Form`);
     };
 
-    const getRandomImage = (breed) => {
-        let images;
+    const handleAddPetClick = () => {
+        navigate('/Addpet'); // Navigate to the page where you add a new pet
+    };
 
+    const getRandomImage = (breed) => {
+        
+    
+        let images;
+    
         switch (true) {
             case breed.toLowerCase().includes('bull'):
                 images = bull;
@@ -115,16 +121,21 @@ function Pets() {
                 images = scottish;
                 break;
             default:
-                images = []; // Default case if no match is found
+                images = ''; // Default case if no match is found
                 break;
         }
-
+    
         return images;
     };
+    
 
     // Filter pets based on the selected filter
         // Filter pets based on the selected filter
         const filteredPets = pets.filter(pet => {
+            if (!pet.breed) {
+                return false; // Skip pets with undefined or null breed
+            }
+        
             if (filter === 'dogs') {
                 return ['bull', 'boxer', 'golden', 'labrador', 'siberian', 'german', 'pomernian', 'pug'].some(breed => pet.breed.toLowerCase().includes(breed));
             } else if (filter === 'cats') {
@@ -133,6 +144,7 @@ function Pets() {
                 return true; // Show all pets when no filter is applied (home)
             }
         });
+        
 
     return (
         <div className="containe">
@@ -140,6 +152,7 @@ function Pets() {
             <div className="content">
                 <center><h1>Pets</h1></center>
                 <center><h3>Find your new Friend Here!!!</h3></center>
+                <button className="add-pet-button" onClick={handleAddPetClick}>ADD PET+</button>
                 <div className='pets-container'>
                     {filteredPets.length === 0 ? (
                         <p>No pets available</p>
@@ -147,15 +160,21 @@ function Pets() {
                         filteredPets.map(pet => (
                             <div key={pet._id} className="pet-card" onClick={() => handleCardClick()}>
                                 <div className="pet-image-container">
-                                    <img
+                                    {/* <img
                                         src={getRandomImage(pet.breed)}
                                         alt={pet.name}
                                         style={{ width: '320px', height: '300px' }}
-                                    />
+                                    /> */}
+                                        <img 
+                                        src={pet.Imgurl}
+                                        alt={pet.name}
+                                        style={{ width: '320px', height: '300px' }}
+                                        />
                                 </div>
                                 <div className='pet-details'>
-                                    <h3 className="pet-name">{pet.name}</h3>
-                                    <p className="pet-description">Age: {pet.age}</p>
+                                    <h3 className="pet-name">{pet.petname}</h3>
+                                    <p className="pet-description">Age: {pet.petage}</p>
+                                    <p className="pet-description">Gender: {pet.gender}</p>
                                     <p className="pet-description">Breed: {pet.breed}</p>
                                     <p className="pet-description">Contact: {pet.contact}</p>
                                 </div>
