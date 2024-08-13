@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './Register.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -24,7 +24,7 @@ function Register() {
             
               if (error.response && error.response.status === 400) {
                 window.alert("Already an User.\n Redirecting to Login");
-                navigate("/Login"); // Set error message
+                navigate("/login"); // Set error message
               } 
             });
     };
@@ -65,7 +65,7 @@ function Register() {
                 </div>
                 <button type="submit">Register</button>
             </form>
-            <p>Already have an account? <a href="/login">Login here</a></p>
+            <p>Already have an account? <Link to="/login">Login here</Link></p>
         </div>
     );
 }
