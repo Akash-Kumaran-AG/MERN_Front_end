@@ -1,0 +1,132 @@
+/* General container styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    position: absolute; /* Centering with absolute positioning */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+input{
+    margin: 20px;
+}
+button{
+    margin: 10px;
+}
+/* Form header styling */
+h2 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 30px; /* Increased space between input groups */
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px; /* Space between label and input */
+    font-size: 18px;
+    color: #444;
+    font-family: 'Arial', sans-serif;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Submit button styling */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Arial', sans-serif;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #00408d;
+}
+
+/* Link styling */
+p {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .input-group label {
+        font-size: 16px;
+    }
+
+    .input-group input {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
