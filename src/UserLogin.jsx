@@ -14,7 +14,7 @@ const UpdateUsers = () => {
     {
         e.preventDefault();
         setErrorMessage('');
-        axios.post("https://mern-back-end-aocr.onrender.com/fetch",{email,password})
+        axios.post("http://localhost:3001/fetch",{email,password})
         .then(result=>{
           console.log(result);
           if(result.status === 200)

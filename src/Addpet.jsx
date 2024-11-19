@@ -34,9 +34,9 @@ function Register() {
     const submit = (e) => {
         e.preventDefault();
         // Handle form submission
-        axios.post("https://mern-back-end-aocr.onrender.com/createPet",{username,email,petname,petage,breed,gender,contact,Imgurl})
+        axios.post("http://localhost:3001/createPet",{username,email,petname,petage,breed,gender,contact,Imgurl})
         .then(result=>{
-            window.alert("success");
+            window.alert("success..\n Check your mail for Confirmation");
             console.log(result);
             if(result.status === 200)
             {

@@ -11,7 +11,7 @@ function Register() {
     const submit = (e) => {
         e.preventDefault();
         // Handle form submission
-        axios.post("https://mern-back-end-aocr.onrender.com/create",{name,email,password})
+        axios.post("http://localhost:3001/create",{name,email,password})
         .then(result=>{
             console.log(result);
             if(result.status === 200)

@@ -8,9 +8,11 @@ function Pets() {
     const [filter, setFilter] = useState('all'); // State to track the current filter
     const navigate = useNavigate();
     const [isNavVisible, setNavVisible] = useState(true);
+    const [favorites, setFavorites] = useState([]);
+
 
     useEffect(() => {
-        axios.get('https://mern-back-end-aocr.onrender.com/fetchPet')
+        axios.get('http://localhost:3001/fetchPet')
             .then(response => {
                 setPets(response.data);
             })
@@ -30,6 +32,7 @@ function Pets() {
                         <li><Link href="/" onClick={() => setFilter('all')}>Home</Link></li>
                         <li><a href="#" onClick={() => setFilter('dogs')}>Dogs</a></li>
                         <li><a href="#" onClick={() => setFilter('cats')}>Cats</a></li>
+                        <li><a href="#" onClick={() => setFilter('favorites')}>Favorites</a></li>
                        
                     </ul>
                 )}
@@ -62,6 +65,32 @@ function Pets() {
     const handleAddPetClick = () => {
         navigate('/Addpet'); // Navigate to the page where you add a new pet
     };
+
+    // const handleFavoriteClick = (pet) => {
+    //     setFavorites((prevFavorites) => {
+    //         if (prevFavorites.includes(pet)) {
+    //             return prevFavorites.filter(fav => fav !== pet); // Remove pet from favorites
+    //         } else {
+    //             return [...prevFavorites, pet]; // Add pet to favorites
+    //         }
+    //     });
+    // };
+    const handleFavoriteClick = (e, pet) => {
+        e.stopPropagation(); // Prevent the card's onClick event from firing
+    
+        setFavorites(prevFavorites => {
+            if (prevFavorites.includes(pet._id)) {
+                // If the pet is already a favorite, remove it
+                return prevFavorites.filter(favPetId => favPetId !== pet._id);
+            } else {
+                // If the pet is not a favorite, add it
+                return [...prevFavorites, pet._id];
+            }
+        });
+    };
+    
+    
+    
 
     const getRandomImage = (breed) => {
         
@@ -132,11 +161,9 @@ function Pets() {
     // Filter pets based on the selected filter
         // Filter pets based on the selected filter
         const filteredPets = pets.filter(pet => {
-            if (!pet.breed) {
-                return false; // Skip pets with undefined or null breed
-            }
-        
-            if (filter === 'dogs') {
+            if (filter === 'favorites') {
+                return favorites.includes(pet._id);
+            } else if (filter === 'dogs') {
                 return ['bull', 'boxer', 'golden', 'labrador', 'siberian', 'german', 'pomernian', 'pug'].some(breed => pet.breed.toLowerCase().includes(breed));
             } else if (filter === 'cats') {
                 return ['persian', 'british', 'blue', 'angora', 'aegean', 'manx', 'toyger', 'selkirk', 'scottish'].some(breed => pet.breed.toLowerCase().includes(breed));
@@ -145,6 +172,8 @@ function Pets() {
             }
         });
         
+        
+        
 
     return (
         <div className="containe">
@@ -152,33 +181,36 @@ function Pets() {
             <div className="content">
                 <center><h1>Pets</h1></center>
                 <center><h3>Find your new Friend Here!!!</h3></center>
-                <button className="add-pet-button" onClick={handleAddPetClick}>ADD PET+</button>
+                <button className="add-pet-button" onClick={handleAddPetClick}>ADD YOUR PET +</button>
                 <div className='pets-container'>
                     {filteredPets.length === 0 ? (
                         <p>No pets available</p>
                     ) : (
                         filteredPets.map(pet => (
-                            <div key={pet._id} className="pet-card" onClick={() => handleCardClick()}>
-                                <div className="pet-image-container">
-                                    {/* <img
-                                        src={getRandomImage(pet.breed)}
-                                        alt={pet.name}
-                                        style={{ width: '320px', height: '300px' }}
-                                    /> */}
-                                        <img 
-                                        src={pet.Imgurl}
-                                        alt={pet.name}
-                                        style={{ width: '320px', height: '300px' }}
-                                        />
-                                </div>
-                                <div className='pet-details'>
-                                    <h3 className="pet-name">{pet.petname}</h3>
-                                    <p className="pet-description">Age: {pet.petage}</p>
-                                    <p className="pet-description">Gender: {pet.gender}</p>
-                                    <p className="pet-description">Breed: {pet.breed}</p>
-                                    <p className="pet-description">Contact: {pet.contact}</p>
-                                </div>
+                            <div key={pet._id} className="pet-card" onClick={handleCardClick}>
+                            <div className="pet-image-container">
+                                <img
+                                    src={pet.Imgurl}
+                                    alt={pet.name}
+                                    style={{ width: '320px', height: '300px' }}
+                                />
                             </div>
+                            <div className='pet-details'>
+                                <h3 className="pet-name">{pet.petname}</h3>
+                                <p className="pet-description">Age: {pet.petage}</p>
+                                <p className="pet-description">Gender: {pet.gender}</p>
+                                <p className="pet-description">Breed: {pet.breed}</p>
+                                <p className="pet-description">Contact: {pet.contact}</p>
+                            </div>
+                            <div className="icon-container">
+                                <i
+                                    className={`fas fa-heart favorite-icon ${favorites.includes(pet._id) ? 'marked' : ''}`}
+                                    onClick={(e) => handleFavoriteClick(e, pet)}
+                                    style={{ color: favorites.includes(pet._id) ? 'red' : 'gray' }}
+                                ></i>
+                            </div>
+                        </div>
+                        
                         ))
                     )}
                 </div>

@@ -12,7 +12,7 @@ const UpdateUsers = () => {
     const sub = (e) =>
     {
         e.preventDefault();
-        axios.post("https://mern-backend-debm.onrender.com/final",{name,email,contact,Like})
+        axios.post("hhttp://localhost:3001/final",{name,email,contact,Like})
         .then(result=>{
             console.log(result);
             window.alert("Thanks for Adopting pet\nWe will contact you soon");

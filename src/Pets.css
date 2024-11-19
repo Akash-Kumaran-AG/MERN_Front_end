@@ -7,7 +7,8 @@
     background-color: #f5f5f5;
 }
 .add-pet-button {
-    width: 150px;
+    height: 50px;
+    width: 200px;
     position: absolute;
     top: 10px;
     right: 20px;
@@ -20,9 +21,23 @@
     font-size: 16px;
 }
 
-.add-pet-button:hover {
-    background-color: #218838;
+.icon-container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  .favorite-icon.marked {
+    color: red;
 }
+  
+  .favorite-icon {
+    font-size: 24px;
+    color: grey; /* Default unmarked color */
+  }
+  
+  .favorite-icon.marked {
+    color: red; /* Marked (favorite) color */
+  }
+  
 
 .pet-card {
     border: 1px solid #ddd;
